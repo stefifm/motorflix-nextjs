@@ -1,9 +1,9 @@
-import Form from '@/components/ui/form'
+import Form from '@/app/components/form'
 
 export default function SignUpPage (): JSX.Element {
   return (
     <Form
-      action=''
+      action='/api/auth/signin'
       title='Registrarse'
       buttonText='Registrarse'
       question='¿Ya tienes una cuenta?'

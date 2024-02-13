@@ -1,9 +1,9 @@
-import Form from '@/components/ui/form'
+import Form from '@/app/components/form'
 
 export default function Loginpage (): JSX.Element {
   return (
     <Form
-      action=''
+      action='/api/auth/signin'
       title='Iniciar Sesión'
       buttonText='Iniciar Sesión'
       question='¿Eres nuevo en MotorFlix?'
