@@ -1,7 +1,14 @@
+import Form from '@/components/ui/form'
+
 export default function Loginpage (): JSX.Element {
   return (
-    <div>
-      <h1>Login Page</h1>
-    </div>
+    <Form
+      action=''
+      title='Iniciar Sesión'
+      buttonText='Iniciar Sesión'
+      question='¿Eres nuevo en MotorFlix?'
+      link='/sign-up'
+      message='¡Registrese!'
+    />
   )
 }

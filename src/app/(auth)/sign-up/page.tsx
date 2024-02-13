@@ -1,7 +1,15 @@
+import Form from '@/components/ui/form'
+
 export default function SignUpPage (): JSX.Element {
   return (
-    <div>
-      <h1>Sign Up Page</h1>
-    </div>
+    <Form
+      action=''
+      title='Registrarse'
+      buttonText='Registrarse'
+      question='¿Ya tienes una cuenta?'
+      link='/login'
+      message='¡Ingrese ahora!'
+    />
+
   )
 }
