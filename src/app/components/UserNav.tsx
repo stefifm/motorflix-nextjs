@@ -2,17 +2,22 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { type Session } from 'next-auth'
 import { signOut } from 'next-auth/react'
 
-export default function UserNav (): JSX.Element {
+interface Props {
+  session: Session
+}
+
+export default function UserNav ({ session }: Props): JSX.Element {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant='ghost' className='relative h-10w10 rounded-sm'>
           <Avatar className='h-10 w-10 rounded-sm'>
-            <AvatarImage className='object-cover' src='https://owtufeeddszaauctalqp.supabase.co/storage/v1/object/public/user%20image/profile-pic.jpg' />
+            <AvatarImage className='object-cover' src={session.user?.image ?? 'https://owtufeeddszaauctalqp.supabase.co/storage/v1/object/public/user%20image/profile-pic.jpg'} />
             <AvatarFallback className='rounded-sm'>
-              SB
+              {session?.user?.name?.match(/(\b\S)?/g)?.join('').toUpperCase() ?? ''}
             </AvatarFallback>
           </Avatar>
         </Button>
@@ -20,8 +25,8 @@ export default function UserNav (): JSX.Element {
       <DropdownMenuContent className='w-56' align='end' forceMount>
         <DropdownMenuLabel>
           <div className='flex flex-col space-y-1'>
-            <p className='text-sm font-medium leading-none'>Stefania</p>
-            <p className='text-xs leading-none text-muted-foreground'>test@gmail.com</p>
+            <p className='text-sm font-medium leading-none'>{session.user?.name}</p>
+            <p className='text-xs leading-none text-muted-foreground'>{session.user?.email}</p>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
