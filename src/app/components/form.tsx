@@ -11,9 +11,10 @@ interface Props {
   question: string
   link: string
   message: string
+  googleButton: string
 }
 
-export default function Form ({ action, title, buttonText, question, link, message }: Props): JSX.Element {
+export default function Form ({ action, title, buttonText, question, link, message, googleButton }: Props): JSX.Element {
   return (
     <section className='mt-24 rounded bg-lochmara-800/70 py-10 px-6 md:mt-0 md:max-w-sm md:px-4'>
     <form method='post' action={action}>
@@ -39,7 +40,7 @@ export default function Form ({ action, title, buttonText, question, link, messa
     </div>
 
     <div className='flex flex-col gap-y-3 w-full justify-center items-center gap-x-3 mt-6'>
-      <GoogleSignInButton />
+      <GoogleSignInButton googleButton={googleButton} />
     </div>
   </section>
   )

@@ -4,7 +4,12 @@ import { Button } from '@/components/ui/button'
 import { signIn } from 'next-auth/react'
 import { FaGoogle } from 'react-icons/fa'
 
-export default function GoogleSignInButton (): JSX.Element {
+interface Props {
+  googleButton: string
+
+}
+
+export default function GoogleSignInButton ({ googleButton }: Props): JSX.Element {
   return (
     <Button
       variant='outline'
@@ -13,7 +18,7 @@ export default function GoogleSignInButton (): JSX.Element {
       onClick={() => signIn('google')}
     >
       <FaGoogle className='w-4 h-4' />
-      Registrarse con Google
+      {googleButton}
     </Button>
   )
 }

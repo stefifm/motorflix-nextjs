@@ -1,6 +1,13 @@
 import Form from '@/app/components/form'
+import { authOptions } from '@/app/utils/auth'
+import { getServerSession } from 'next-auth'
+import { redirect } from 'next/navigation'
 
-export default function Loginpage (): JSX.Element {
+export default async function Loginpage (): Promise<JSX.Element> {
+  const session = await getServerSession(authOptions)
+  if (session !== null) {
+    return redirect('/home')
+  }
   return (
     <Form
       action='/api/auth/signin'
@@ -9,6 +16,7 @@ export default function Loginpage (): JSX.Element {
       question='¿Eres nuevo en MotorFlix?'
       link='/sign-up'
       message='¡Registrese!'
+      googleButton='Iniciar Sesión con Google'
     />
   )
 }
