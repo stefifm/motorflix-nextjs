@@ -3,6 +3,8 @@ import { Button } from '@/components/ui/button'
 import { Heart, PlayCircle } from 'lucide-react'
 import PlayMotorVideo from './PlayMotorVideo'
 import { useState } from 'react'
+import { addToWatchList, deleteFromWatchList } from '../utils/action'
+import { usePathname } from 'next/navigation'
 
 interface Props {
   title: string
@@ -24,6 +26,7 @@ export default function VideoCard ({
   duration
 }: Props): JSX.Element {
   const [open, setOpen] = useState(false)
+  const pathname = usePathname()
   return (
     <>
       <button onClick={() => { setOpen(true) }} className='-mt-14'>
@@ -32,7 +35,9 @@ export default function VideoCard ({
       <div className='right-5 top-5 absolute z-10'>
         {watchList
           ? (
-          <form>
+          <form action={deleteFromWatchList}>
+            <input type="hidden" name='watchListId' value={watchListId} />
+            <input type="hidden" name='pathname' value={pathname} />
             <Button
               variant='outline'
               size='icon'>
@@ -41,7 +46,9 @@ export default function VideoCard ({
           </form>
             )
           : (
-          <form>
+          <form action={addToWatchList}>
+            <input type="hidden" name='motorId' value={motorId}/>
+            <input type="hidden" name='pathname' value={pathname} />
             <Button
               variant='outline'
               size='icon'>
