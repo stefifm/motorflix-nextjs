@@ -47,6 +47,27 @@ model User {
   sessions      Session[]
 }
 
+model Motor {
+  id Int @id
+  imageString String
+  title String
+  duration Float
+  overview String
+  youtubeString String
+  category String
+  videoSource String
+  createdAt DateTime @default(now())
+  WatchLists WatchList[]
+}
+
+model WatchList {
+  id String @id @default(uuid())
+  userId String
+
+  Motor Motor? @relation(fields: [motorId], references: [id])
+  motorId Int
+}
+
 model VerificationToken {
   identifier String
   token      String   @unique

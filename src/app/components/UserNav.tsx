@@ -13,7 +13,7 @@ export default function UserNav ({ session }: Props): JSX.Element {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant='ghost' className='relative h-10w10 rounded-sm'>
+        <Button variant='ghost' className='relative h-10 w-10 rounded-sm'>
           <Avatar className='h-10 w-10 rounded-sm'>
             <AvatarImage className='object-cover' src={session.user?.image ?? 'https://owtufeeddszaauctalqp.supabase.co/storage/v1/object/public/user%20image/profile-pic.jpg'} />
             <AvatarFallback className='rounded-sm'>
