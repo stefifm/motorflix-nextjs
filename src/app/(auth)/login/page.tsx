@@ -1,4 +1,4 @@
-import Form from '@/app/components/form'
+import Form from '@/app/ui/form'
 import { authOptions } from '@/app/utils/auth'
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'

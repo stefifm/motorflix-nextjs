@@ -1,5 +1,5 @@
-import MotorVideo from '../components/MotorVideo'
-import RecentlyAdded from '../components/RecentlyAdded'
+import MotorVideo from '../ui/MotorVideo'
+import RecentlyAdded from '../ui/RecentlyAdded'
 
 export default function HomePage (): JSX.Element {
   return (

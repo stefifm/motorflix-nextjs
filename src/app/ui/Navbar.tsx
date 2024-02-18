@@ -2,9 +2,11 @@
 import Link from 'next/link'
 import Logo from '../../../public/logo-motorflix.png'
 import { usePathname } from 'next/navigation'
-import { Bell, Search } from 'lucide-react'
+import { Search } from 'lucide-react'
 import UserNav from './UserNav'
 import { type Session } from 'next-auth'
+import { useState } from 'react'
+import SearchInput from './SearchInput'
 
 interface LinkProps {
   name: string
@@ -49,6 +51,7 @@ interface Props {
 
 export default function Navbar ({ session }: Props): JSX.Element {
   const pathName = usePathname()
+  const [open, setOpen] = useState(false)
   return (
     <nav className="w-full max-w-7xl mx-auto flex items-center justify-between px-5 sm:px-6 py-5 lg:px-8">
       <section className="flex items-center">
@@ -79,10 +82,15 @@ export default function Navbar ({ session }: Props): JSX.Element {
       </section>
 
       <section className='flex items-center gap-x-8'>
-        <Search className='w-5 h-5 cursor-pointer text-lochmara-100' />
-        <Bell className='w-5 h-5 cursor-pointer text-lochmara-100' />
+        <Search className='w-5 h-5 cursor-pointer text-lochmara-100' onClick={() => { setOpen(!open) }}/>
         <UserNav session={session} />
       </section>
+
+      {
+        open && (
+          <SearchInput open={open} changeOpen={setOpen} />
+        )
+      }
     </nav>
   )
 }

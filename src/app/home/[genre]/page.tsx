@@ -1,7 +1,9 @@
-import VideoCard from '@/app/components/VideoCard'
+import VideoCard from '@/app/ui/VideoCard'
+import { VideoCardSkeleton } from '@/app/ui/skeletons'
 import { getVideosCategory } from '@/app/utils/action'
 import { authOptions } from '@/app/utils/auth'
 import { getServerSession } from 'next-auth'
+import { Suspense } from 'react'
 
 export default async function CategoryPage ({
   params
@@ -29,16 +31,18 @@ export default async function CategoryPage ({
                 alt='Video de Motorsport'
                 className='absolute w-full h-full object-cover -z-10 rounded-lg'
               />
-              <VideoCard
-                motorId={video?.id}
-                title={video?.title}
-                overview={video?.overview}
-                youtubeString={video?.youtubeString}
-                watchListId={video?.WatchLists[0]?.id}
-                watchList={video?.WatchLists?.length > 0}
-                key={video?.id}
-                duration={video?.duration}
-              />
+              <Suspense fallback={<VideoCardSkeleton />}>
+                <VideoCard
+                  motorId={video?.id}
+                  title={video?.title}
+                  overview={video?.overview}
+                  youtubeString={video?.youtubeString}
+                  watchListId={video?.WatchLists[0]?.id}
+                  watchList={video?.WatchLists?.length > 0}
+                  key={video?.id}
+                  duration={video?.duration}
+                />
+              </Suspense>
             </div>
           </div>
         </div>

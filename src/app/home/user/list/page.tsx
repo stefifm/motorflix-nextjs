@@ -1,4 +1,4 @@
-import VideoCard from '@/app/components/VideoCard'
+import VideoCard from '@/app/ui/VideoCard'
 import { getWatchList } from '@/app/utils/action'
 import { authOptions } from '@/app/utils/auth'
 import { getServerSession } from 'next-auth'

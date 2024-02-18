@@ -55,6 +55,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-black text-foreground;
+    @apply bg-gradient-to-r from-black to-lochmara-950  text-foreground;
   }
 }
+
