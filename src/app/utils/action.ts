@@ -255,3 +255,51 @@ export const deleteFromWatchList = async (formData: FormData): Promise<void> => 
 
   revalidatePath(pathname)
 }
+
+export const searchVideos = async (search: string, userId: string): Promise<Array<{
+  id: number
+  imageString: string
+  title: string
+  duration: number
+  overview: string
+  youtubeString: string
+  WatchLists: Array<{
+    id: string
+    userId: string
+    motorId: number
+  }>
+}>> => {
+  const data = await prisma.motor.findMany({
+    where: {
+      OR: [
+        {
+          title: {
+            contains: search,
+            mode: 'insensitive'
+          }
+        },
+        {
+          category: {
+            contains: search,
+            mode: 'insensitive'
+          }
+        }
+      ]
+    },
+    select: {
+      title: true,
+      overview: true,
+      imageString: true,
+      youtubeString: true,
+      duration: true,
+      id: true,
+      WatchLists: {
+        where: {
+          userId
+        }
+      }
+    }
+  })
+
+  return data
+}
