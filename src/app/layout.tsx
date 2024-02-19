@@ -17,7 +17,7 @@ export default function RootLayout ({
 }>): JSX.Element {
   return (
     <html lang="es">
-      <body className={`${inter.className} overflow-hidden`}>
+      <body className={`${inter.className} w-screen overflow-x-hidden`}>
         <NextAuthProvider>
           {children}
         </NextAuthProvider>

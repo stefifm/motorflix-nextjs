@@ -40,7 +40,9 @@ export default function VideoCard ({
             <input type="hidden" name='pathname' value={pathname} />
             <Button
               variant='outline'
-              size='icon'>
+              size='icon'
+              className='bg-red-200 hover:bg-red-300 transition-colors duration-300'
+              >
               <Heart className='h-4 w-4 text-red-500' />
             </Button>
           </form>

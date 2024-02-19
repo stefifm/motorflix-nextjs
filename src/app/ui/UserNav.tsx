@@ -11,12 +11,17 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { type Session } from 'next-auth'
 import { signOut } from 'next-auth/react'
+import { type LinkProps } from './Navbar'
+import { usePathname } from 'next/navigation'
+import Link from 'next/link'
 
 interface Props {
   session: Session
+  links: LinkProps[]
 }
 
-export default function UserNav ({ session }: Props): JSX.Element {
+export default function UserNav ({ session, links }: Props): JSX.Element {
+  const pathname = usePathname()
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -50,6 +55,40 @@ export default function UserNav ({ session }: Props): JSX.Element {
             <p className='text-xs leading-none text-muted-foreground'>{session.user?.email}</p>
           </div>
         </DropdownMenuLabel>
+        <DropdownMenuSeparator className='lg:hidden' />
+
+        <DropdownMenuLabel className='lg:hidden flex flex-col gap-3'>
+          <ul>
+            {links.map((link, index) => (
+              <div key={index}>
+                {pathname === link.href
+                  ? (
+                  <DropdownMenuItem>
+                    <li>
+                      <Link
+                        href={link.href}
+                        className='text-lochmara-100 font-bold underline text-md'>
+                        {link.name}
+                      </Link>
+                    </li>
+                  </DropdownMenuItem>
+                    )
+                  : (
+                  <DropdownMenuItem>
+                    <li>
+                      <Link
+                        href={link.href}
+                        className='text-lochmara-200/90 font-normal text-md'>
+                        {link.name}
+                      </Link>
+                    </li>
+                  </DropdownMenuItem>
+                    )}
+              </div>
+            ))}
+          </ul>
+        </DropdownMenuLabel>
+
         <DropdownMenuSeparator />
 
         <DropdownMenuItem

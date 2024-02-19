@@ -17,7 +17,7 @@ export default async function WatchList (): Promise<JSX.Element> {
       <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 px5 sm:px-0 mt-10 gap-6'>
         {data.length === 0
           ? (
-          <NoDataCard />
+          <NoDataCard title='No hay elementos en su lista' description='Vea algún video que le guste y agréguelo' />
             )
           : (
               data.map((video) => (
@@ -30,7 +30,7 @@ export default async function WatchList (): Promise<JSX.Element> {
                 className='rounded-sm absolute w-full h-full object-cover'
               />
 
-              <div className='h-60 relative z-10 w-full transform transition duration-500 hover:scale-125 opacity-0 hover:opacity-100'>
+              <div className='h-60 relative z-10 w-full transform transition duration-500 hover:scale-110 opacity-0 hover:opacity-100'>
                 <div className='bg-gradient-to-b from-transparent via-black/50 to-lochmara-950 z-10 w-full h-full rounded-lg flex items-center justify-center border'>
                   <img
                     src={video?.Motor?.imageString}

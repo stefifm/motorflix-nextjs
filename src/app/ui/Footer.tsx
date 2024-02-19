@@ -7,13 +7,13 @@ export default function Footer (): JSX.Element {
      mt-auto gap-7">
       <p className="text-lochmara-50 font-bold">&copy; Stefania Verónica Bruera</p>
       <div className='flex gap-4 text-lg'>
-        <a href="">
+        <a href="https://github.com/stefifm">
           <FaGithub className="text-lochmara-50" />
         </a>
-        <a href="">
+        <a href="https://twitter.com/stefifm">
           <FaTwitter className="text-lochmara-50" />
         </a>
-        <a href="">
+        <a href="https://www.linkedin.com/in/stefania-bruera">
           <FaLinkedin className="text-lochmara-50" />
         </a>
       </div>

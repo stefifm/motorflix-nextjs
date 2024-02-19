@@ -1,5 +1,6 @@
 'use client'
 
+import { Button } from '@/components/ui/button'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 
@@ -30,8 +31,8 @@ export default function SearchInput ({ open, changeOpen }: Props): JSX.Element {
   }
 
   return (
-    <form onSubmit={handleSubmit} className='absolute top-16 right-[10%]
-      xl:right-[20%] rounded-lg z-10 bg-lochmara-900 p-2'>
+    <form onSubmit={handleSubmit} className='absolute top-16 right-8 md:right-[10%]
+      xl:right-24 rounded-lg z-10 bg-lochmara-900 p-2 flex flex-col gap-2 md:flex-row items-center'>
       <input
         type='text'
         placeholder='Buscar'
@@ -41,6 +42,12 @@ export default function SearchInput ({ open, changeOpen }: Props): JSX.Element {
       value={searchQuery ?? ''}
       onChange={(e) => { setSearchQuery(e.target.value) }}
       />
+      <Button
+        type='submit'
+        className='w-full h-10 md:w-20  md:ml-2 bg-lochmara-600 text-white hover:bg-lochmara-700 transition-all duration-300 ease'
+      >
+        Buscar
+      </Button>
     </form>
   )
 }

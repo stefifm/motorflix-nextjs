@@ -83,7 +83,7 @@ export default function Navbar ({ session }: Props): JSX.Element {
 
       <section className='flex items-center gap-x-8'>
         <Search className='w-5 h-5 cursor-pointer text-lochmara-100' onClick={() => { setOpen(!open) }}/>
-        <UserNav session={session} />
+        <UserNav session={session} links={links} />
       </section>
 
       {
