@@ -1,5 +1,7 @@
+import { GeneralLoading } from '@/app/ui/loadings'
+
 export default function loading (): JSX.Element {
   return (
-    <div>loading</div>
+    <GeneralLoading />
   )
 }

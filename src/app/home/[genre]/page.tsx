@@ -1,5 +1,5 @@
 import VideoCard from '@/app/ui/VideoCard'
-import { VideoCardSkeleton } from '@/app/ui/skeletons'
+import { VideoCardLoading } from '@/app/ui/loadings'
 import { getVideosCategory } from '@/app/utils/action'
 import { authOptions } from '@/app/utils/auth'
 import { getServerSession } from 'next-auth'
@@ -31,7 +31,7 @@ export default async function CategoryPage ({
                 alt='Video de Motorsport'
                 className='absolute w-full h-full object-cover -z-10 rounded-lg'
               />
-              <Suspense fallback={<VideoCardSkeleton />}>
+              <Suspense fallback={<VideoCardLoading />}>
                 <VideoCard
                   motorId={video?.id}
                   title={video?.title}

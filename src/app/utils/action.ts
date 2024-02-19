@@ -1,18 +1,12 @@
 'use server'
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, unstable_noStore as noStore } from 'next/cache'
 import prisma from './db'
 import { getServerSession } from 'next-auth'
 import { authOptions } from './auth'
+import { type Motor, type MainVideo } from './definitions'
 
-export const getData = async (): Promise<{
-  id: number
-  imageString: string
-  title: string
-  duration: number
-  overview: string
-  youtubeString: string
-  videoSource: string
-} | null> => {
+export const getData = async (): Promise< MainVideo | null> => {
+  noStore()
   const data = await prisma.motor.findFirst({
     select: {
       title: true,
@@ -28,19 +22,8 @@ export const getData = async (): Promise<{
   return data
 }
 
-export const getVideos = async (userId: string): Promise<Array<{
-  id: number
-  imageString: string
-  title: string
-  duration: number
-  overview: string
-  youtubeString: string
-  WatchLists: Array<{
-    id: string
-    userId: string
-    motorId: number
-  }>
-}>> => {
+export const getVideos = async (userId: string): Promise<Motor[]> => {
+  noStore()
   const data = await prisma.motor.findMany({
     select: {
       title: true,
@@ -61,22 +44,32 @@ export const getVideos = async (userId: string): Promise<Array<{
     take: 4
   })
 
-  return data
+  return data as unknown as Motor[]
+}
+export const getOtherVideos = async (userId: string): Promise<Motor[]> => {
+  noStore()
+  const data = await prisma.motor.findMany({
+    select: {
+      title: true,
+      overview: true,
+      imageString: true,
+      youtubeString: true,
+      duration: true,
+      id: true,
+      WatchLists: {
+        where: {
+          userId
+        }
+      }
+    },
+    take: -8
+  })
+
+  return data as unknown as Motor[]
 }
 
-export const getVideosCategory = async (category: string, userId: string): Promise<Array<{
-  id: number
-  imageString: string
-  title: string
-  duration: number
-  overview: string
-  youtubeString: string
-  WatchLists: Array<{
-    id: string
-    userId: string
-    motorId: number
-  }>
-}>> => {
+export const getVideosCategory = async (category: string, userId: string): Promise<Motor[]> => {
+  noStore()
   switch (category) {
     case 'wec': {
       const data = await prisma.motor.findMany({
@@ -97,7 +90,7 @@ export const getVideosCategory = async (category: string, userId: string): Promi
           }
         }
       })
-      return data
+      return data as unknown as Motor[]
     }
     case 'indycar': {
       const data = await prisma.motor.findMany({
@@ -118,7 +111,7 @@ export const getVideosCategory = async (category: string, userId: string): Promi
           }
         }
       })
-      return data
+      return data as unknown as Motor[]
     }
 
     case 'f1': {
@@ -140,7 +133,7 @@ export const getVideosCategory = async (category: string, userId: string): Promi
           }
         }
       })
-      return data
+      return data as unknown as Motor[]
     }
     case 'imsa': {
       const data = await prisma.motor.findMany({
@@ -161,7 +154,7 @@ export const getVideosCategory = async (category: string, userId: string): Promi
           }
         }
       })
-      return data
+      return data as unknown as Motor[]
     }
     case 'recently': {
       const data = await prisma.motor.findMany({
@@ -182,7 +175,7 @@ export const getVideosCategory = async (category: string, userId: string): Promi
           }
         }
       })
-      return data
+      return data as unknown as Motor[]
     }
 
     default: {
@@ -206,6 +199,7 @@ export const getWatchList = async (userId: string): Promise<Array<{
     } | null>
   } | null
 }>> => {
+  noStore()
   const data = await prisma.watchList.findMany({
     where: {
       userId
@@ -230,6 +224,7 @@ export const getWatchList = async (userId: string): Promise<Array<{
 
 export const addToWatchList = async (formData: FormData): Promise<void> => {
   'use server'
+  noStore()
   const motorId = formData.get('motorId')
   const pathname = formData.get('pathname') as string
   const session = await getServerSession(authOptions)
@@ -245,6 +240,7 @@ export const addToWatchList = async (formData: FormData): Promise<void> => {
 
 export const deleteFromWatchList = async (formData: FormData): Promise<void> => {
   'use server'
+  noStore()
   const watchListId = formData.get('watchListId') as string
   const pathname = formData.get('pathname') as string
   await prisma.watchList.delete({
@@ -256,19 +252,8 @@ export const deleteFromWatchList = async (formData: FormData): Promise<void> => 
   revalidatePath(pathname)
 }
 
-export const searchVideos = async (search: string, userId: string): Promise<Array<{
-  id: number
-  imageString: string
-  title: string
-  duration: number
-  overview: string
-  youtubeString: string
-  WatchLists: Array<{
-    id: string
-    userId: string
-    motorId: number
-  }>
-}>> => {
+export const searchVideos = async (search: string, userId: string): Promise<Motor[]> => {
+  noStore()
   const data = await prisma.motor.findMany({
     where: {
       OR: [
@@ -301,5 +286,5 @@ export const searchVideos = async (search: string, userId: string): Promise<Arra
     }
   })
 
-  return data
+  return data as unknown as Motor[]
 }

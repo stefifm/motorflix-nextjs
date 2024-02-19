@@ -1,13 +1,13 @@
 import { getServerSession } from 'next-auth'
-import { getVideos } from '../utils/action'
+import { getOtherVideos } from '../utils/action'
 import VideoCard from './VideoCard'
 import { authOptions } from '../utils/auth'
 import { Suspense } from 'react'
 import { VideoCardLoading } from './loadings'
 
-export default async function RecentlyAdded (): Promise<JSX.Element> {
+export default async function OtherVideos (): Promise<JSX.Element> {
   const session = await getServerSession(authOptions)
-  const data = await getVideos(session?.user?.email ?? '0')
+  const data = await getOtherVideos(session?.user?.email ?? '0')
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-8 gap-6'>
       {data.map((video) => (

@@ -1,7 +1,7 @@
-import { CategorySkeleton } from '@/app/ui/skeletons'
+import { GeneralLoading } from '@/app/ui/loadings'
 
 export default function loading (): JSX.Element {
   return (
-    <CategorySkeleton />
+    <GeneralLoading />
   )
 }

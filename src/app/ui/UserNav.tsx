@@ -1,7 +1,14 @@
 'use client'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
 import { type Session } from 'next-auth'
 import { signOut } from 'next-auth/react'
 
@@ -13,16 +20,30 @@ export default function UserNav ({ session }: Props): JSX.Element {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant='ghost' className='relative h-10 w-10 rounded-sm'>
+        <Button
+          variant='ghost'
+          className='relative h-10 w-10 rounded-sm'>
           <Avatar className='h-10 w-10 rounded-sm'>
-            <AvatarImage className='object-cover' src={session.user?.image ?? 'https://owtufeeddszaauctalqp.supabase.co/storage/v1/object/public/user%20image/profile-pic.jpg'} />
+            <AvatarImage
+              className='object-cover'
+              src={
+                session.user?.image ??
+                'https://owtufeeddszaauctalqp.supabase.co/storage/v1/object/public/user%20image/profile-pic.jpg'
+              }
+            />
             <AvatarFallback className='rounded-sm'>
-              {session?.user?.name?.match(/(\b\S)?/g)?.join('').toUpperCase() ?? ''}
+              {session?.user?.name
+                ?.match(/(\b\S)?/g)
+                ?.join('')
+                .toUpperCase() ?? ''}
             </AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='w-56' align='end' forceMount>
+      <DropdownMenuContent
+        className='w-56'
+        align='end'
+        forceMount>
         <DropdownMenuLabel>
           <div className='flex flex-col space-y-1'>
             <p className='text-sm font-medium leading-none'>{session.user?.name}</p>
@@ -31,7 +52,12 @@ export default function UserNav ({ session }: Props): JSX.Element {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem onClick={async () => { await signOut() }}>Cerrar Sesión</DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={async () => {
+            await signOut()
+          }}>
+          Cerrar Sesión
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )

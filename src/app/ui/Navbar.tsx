@@ -8,7 +8,7 @@ import { type Session } from 'next-auth'
 import { useState } from 'react'
 import SearchInput from './SearchInput'
 
-interface LinkProps {
+export interface LinkProps {
   name: string
   href: string
 }
@@ -53,10 +53,10 @@ export default function Navbar ({ session }: Props): JSX.Element {
   const pathName = usePathname()
   const [open, setOpen] = useState(false)
   return (
-    <nav className="w-full max-w-7xl mx-auto flex items-center justify-between px-5 sm:px-6 py-5 lg:px-8">
+    <nav className="w-full relative z-10 max-w-7xl mx-auto flex items-center justify-between px-5 sm:px-6 py-5 lg:px-8">
       <section className="flex items-center">
         <Link href='/home' className="w-40">
-          <img src={Logo.src} alt="MotorFlix Logo" />
+          <img src={Logo.src} alt="MOTORFLIX Logo" />
         </Link>
         <ul className='lg:flex gap-x-4 ml-14 hidden'>
           {links.map((link, index) => (

@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { NextAuthProvider } from './ui/NextAuthProvider'
-import Footer from './ui/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,10 +17,9 @@ export default function RootLayout ({
 }>): JSX.Element {
   return (
     <html lang="es">
-      <body className={inter.className}>
+      <body className={`${inter.className} overflow-hidden`}>
         <NextAuthProvider>
           {children}
-          <Footer />
         </NextAuthProvider>
       </body>
     </html>
